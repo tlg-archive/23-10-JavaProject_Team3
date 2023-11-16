@@ -1,11 +1,17 @@
 package com.drunkgolf;
 
-class Hole {
+public class Hole {
     private int par;
     private int swingsTaken;
     private int distanceToHole;
 
     // ctor
+
+
+    public Hole() {
+
+    }
+
     public Hole(int par, int initialDistance) {
         this.par = par;
         this.swingsTaken = 0;
