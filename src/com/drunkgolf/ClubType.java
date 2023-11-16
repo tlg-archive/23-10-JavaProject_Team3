@@ -13,5 +13,10 @@ public enum ClubType {
         this.minRange = minRange;
         this.maxRange = maxRange;
     }
+    public int swingClub(ClubType club){
+        double rand = Math.random() * (club.maxRange - club.minRange + 1) + club.minRange;
+        System.out.printf("Your ball went %.2f yards!", rand);
+        return (int) rand;
+    }
 
 }
