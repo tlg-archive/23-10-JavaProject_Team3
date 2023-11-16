@@ -1,4 +1,6 @@
-enum ClubType {
+package com.drunkgolf;
+
+public enum ClubType {
     DRIVER(200, 300),
     IRON(100, 180),
     WEDGE(20, 80),
