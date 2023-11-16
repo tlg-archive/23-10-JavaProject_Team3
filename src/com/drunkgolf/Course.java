@@ -8,6 +8,7 @@ public class Course {
     //fields
     int courseSize = 1;
     int totalPar = 3;
+    boolean complete = false;
 
     //ctor
     public Course(int courseSize) {
@@ -21,16 +22,24 @@ public class Course {
 
     //lists
     List<Integer> scoreCard = new ArrayList<>();
+    List<Hole> holes = new ArrayList<>();
 
     //methods
-//    public boolean isComplete() {
-//        boolean complete = false;
-//        if (Hole.isComplete = true) {
-//            complete = true;
-//            scoreCard.add(hole.score());
-//        }
-//        return complete;
-//    }
+    public boolean isComplete() { // says course is complete after one hole is complete
+        if (Hole.isComplete = true) {
+            complete = true;
+            scoreCard.add(Hole.score());
+        }
+        return complete;
+    }
+
+    public void getHoles(){
+        for (int i = 0; i < courseSize; i++){
+            Hole hole = new Hole();
+            holes.add(hole);
+        }
+        System.out.println(holes);
+    }
 
     //accessors
     public int getCourseSize() {
@@ -48,6 +57,8 @@ public class Course {
     public void setTotalPar(int totalPar) {
         this.totalPar = totalPar;
     }
+
+
 
     public void getScoreCard() {
         System.out.println(scoreCard);
