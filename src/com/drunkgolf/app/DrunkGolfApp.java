@@ -7,16 +7,14 @@ import java.util.Scanner;
 
 // Controller
 class DrunkGolfApp {
-    private Scanner scanner = new Scanner(System.in);
-    private ClubType club = ClubType.DRIVER;
+    private final Scanner scanner = new Scanner(System.in);
+    private ClubType club;
 
 
     public void execute() {
         welcome();
         int courseNum = promptForCourse();
         teeOff(courseNum);
-        club.swingClub(club);
-
         endResults();
 
     }
@@ -29,10 +27,11 @@ class DrunkGolfApp {
 
     public void teeOff(int courseNum) {
         Course currentCourse = new Course(courseNum);
+        currentCourse.getHoles();
         while(!currentCourse.isComplete()) {
             ClubType club = promptForClub();
             currentCourse.play(club);
-            System.out.println(Course.getScoreCard()); // clear screen and maintain as header while playing
+            currentCourse.getScoreCard(); // clear screen and maintain as header while playing -- souting a sout
         }
     }
 

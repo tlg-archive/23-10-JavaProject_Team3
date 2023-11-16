@@ -58,8 +58,6 @@ public class Course {
         this.totalPar = totalPar;
     }
 
-
-
     public void getScoreCard() {
         System.out.println(scoreCard);
     }
