@@ -1,6 +1,7 @@
 package com.drunkgolf.app;
 
 import com.drunkgolf.ClubType;
+import com.drunkgolf.Course;
 
 import java.util.Scanner;
 
@@ -31,7 +32,7 @@ class DrunkGolfApp {
         while(!currentCourse.isComplete()) {
             ClubType club = promptForClub();
             currentCourse.play(club);
-            System.out.println(currentCourse.showScoreCard()); // clear screen and maintain as header while playing
+            System.out.println(Course.getScoreCard()); // clear screen and maintain as header while playing
         }
     }
 
