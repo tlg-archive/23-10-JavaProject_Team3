@@ -6,7 +6,7 @@ import com.drunkgolf.Course;
 import java.util.Scanner;
 
 // Controller
-class DrunkGolfApp {
+public class DrunkGolfApp {
     private final Scanner scanner = new Scanner(System.in);
     private ClubType club;
 
@@ -27,12 +27,11 @@ class DrunkGolfApp {
 
     public void teeOff(int courseNum) {
         Course currentCourse = new Course(courseNum);
-        currentCourse.getHoles();
+        currentCourse.getCourse();
         while(!currentCourse.isComplete()) {
-            ClubType club = promptForClub();
-            currentCourse.play(club);
-            currentCourse.getScoreCard(); // clear screen and maintain as header while playing -- souting a sout
+            currentCourse.play();
         }
+        currentCourse.getScoreCard(); // clear screen and maintain as header while playing
     }
 
     private int promptForCourse() {
@@ -59,9 +58,7 @@ class DrunkGolfApp {
     }
 
 
-    private ClubType promptForClub(){
 
-    }
     private void endResults() {
         System.out.println("+ + + + + + + + + + + + + +");
         System.out.println("Y O U   A R E   T R A S H");
