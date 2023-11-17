@@ -31,7 +31,7 @@ public class DrunkGolfApp {
         while (!currentCourse.isComplete()) {
             currentCourse.play();
         }
-        currentCourse.getScoreCard(); // clear screen and maintain as header while playing
+        System.out.println(currentCourse.getScore());
     }
 
     private int promptForCourse() {
@@ -58,6 +58,8 @@ public class DrunkGolfApp {
 
 
     private void endResults() {
+
+        System.out.println();
         System.out.println("+ + + + + + + + + + + + + +");
         System.out.println("Y O U   A R E   T R A S H");
         System.out.println("+ + + + + + + + + + + + + +");

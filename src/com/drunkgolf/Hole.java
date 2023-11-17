@@ -3,11 +3,14 @@ package com.drunkgolf;
 public class Hole {
     private static final int MIN_DISTANCE = 100;
     private static final int MAX_DISTANCE = 500;
+    private static final int TOLERANCE = 8;
+
 
     private int par;
     private int swingsTaken;
     private int distanceToHole;
     private double initialHoleDistance;
+
 
     // ctor
 
@@ -32,11 +35,11 @@ public class Hole {
 
     boolean holeComplete() {
         boolean holeComplete = false;
-        if (distanceToHole < 8) {
+        if (distanceToHole < TOLERANCE) {
             holeComplete = true;
             System.out.println("G O O D   J O B   B U D!");
         }
-        if (swingsTaken > getPar() + 1) {
+        else if (swingsTaken > getPar() + 1) {
             holeComplete = true;
             System.out.println("B A D   J O B   B U D");
         }
@@ -72,7 +75,6 @@ public class Hole {
 
     private int generateHole() {
         initialHoleDistance = Math.random() * (MAX_DISTANCE - MIN_DISTANCE + 1) + MIN_DISTANCE;
-        //System.out.printf("The hole is %s yards away.\n", (int) initialHoleDistance);
         return (int) initialHoleDistance;
     }
 }

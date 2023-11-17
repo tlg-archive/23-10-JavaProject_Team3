@@ -37,6 +37,4 @@ public enum ClubType {
     String getPutterRange() {
         return ClubType.PUTTER.minRange + " - " + ClubType.PUTTER.maxRange;
     }
-
-
 }
