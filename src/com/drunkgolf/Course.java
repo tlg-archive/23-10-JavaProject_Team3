@@ -40,7 +40,7 @@ public class Course {
         Hole hole = course.get(0);
         System.out.printf("\n\nThe hole is %s yards away.\n" +
                 "The par for the hole is: %s \n" +
-                "Score Card: %s\n ", hole.getDistanceToHole(), hole.getPar(), getScore());
+                "Score Card: %s\n", hole.getDistanceToHole(), hole.getPar(), getScore());
         while(!hole.holeComplete()){
             ClubType clubType = promptForClub();
             hole.updateDistance(clubType.swingClub(clubType));
