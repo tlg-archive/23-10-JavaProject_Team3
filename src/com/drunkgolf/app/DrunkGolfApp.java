@@ -37,18 +37,17 @@ public class DrunkGolfApp {
     private int promptForCourse() {
         boolean validInput = false;
         int courseSize = 0;
-        System.out.println("Enter amount of holes: ");
-        String userInput = scanner.nextLine().trim();
-        courseSize = Integer.parseInt(userInput);
 
         while(!validInput) {
+            printRules();
+            System.out.println("Enter amount of holes: ");
+            String userInput = scanner.nextLine().trim();
+            courseSize = Integer.parseInt(userInput);
             if(userInput.matches("\\d{1,2}")) {
                 if(courseSize == 1 || courseSize == 9 || courseSize == 18) {
                     validInput = true;
                 }
-                printRules();
             }
-            printRules();
         }
         return courseSize;
     }

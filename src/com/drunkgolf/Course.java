@@ -38,36 +38,46 @@ public class Course {
 
     public void play() {
         Hole hole = course.get(0);
+        System.out.printf("\n\nThe hole is %s yards away.\n" +
+                "The par for the hole is: %s \n" +
+                "Score Card: %s\n ", hole.getDistanceToHole(), hole.getPar(), getScore());
         while(!hole.holeComplete()){
             ClubType clubType = promptForClub();
             hole.updateDistance(clubType.swingClub(clubType));
-            getScoreCard();
         }
         scoreCard.add(hole.score());
         course.remove(hole);
-
+        System.out.println(getScoreCard());
     }
+
     //accessors
     public int getCourseSize() {
         return courseSize;
     }
 
-
     public void setCourseSize(int courseSize) {
         this.courseSize = courseSize;
     }
 
+    public List<Integer> getScoreCard() {
+        return scoreCard;
+    }
 
-    public void getScoreCard() {
-        System.out.println(scoreCard);
+    public int getScore() {
+        int sum = 0;
+        for(int score : scoreCard) {
+            sum += score;
+        }
+        return sum;
     }
     private ClubType promptForClub(){
         boolean validInput = false;
         ClubType club = null;
-        System.out.println("Please choose: [D]river, [I]ron, [W]edge, [P]utter");
-        String userInput = scanner.next().trim().toUpperCase();
+
 
         while(!validInput) {
+            System.out.println("Please choose: [D]river, [I]ron, [W]edge, [P]utter");
+            String userInput = scanner.nextLine().trim().toUpperCase();
             if(userInput.matches("[A-Z]")) {
                 if("D".equals(userInput)) {
                     club = ClubType.DRIVER;
