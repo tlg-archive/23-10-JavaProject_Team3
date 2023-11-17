@@ -76,9 +76,8 @@ public class Hole {
     }
 
     private int generateHole(){
-        initialHoleDistance = Math.random() * (MAX_DISTANCE - MIN_DISTANCE + 1) + MIN_DISTANCE;
-
-        System.out.printf("The hole is %.2f yards away.\n", initialHoleDistance);
+         initialHoleDistance = Math.random() * (MAX_DISTANCE - MIN_DISTANCE + 1) + MIN_DISTANCE;
+        System.out.printf("The hole is %s yards away.\n", (int) initialHoleDistance);
         return (int) initialHoleDistance;
     }
 }
