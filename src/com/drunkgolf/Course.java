@@ -37,8 +37,8 @@ public class Course {
     }
 
     public void play() {
-        course.get(0);
-        while(!holeComplete){
+        Hole hole = course.get(0);
+        while(!hole.holeComplete()){
             ClubType clubType = promptForClub();
             hole.updateDistance(clubType.swingClub(clubType));
             getScoreCard();
