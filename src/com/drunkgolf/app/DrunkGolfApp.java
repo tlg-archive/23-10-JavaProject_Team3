@@ -27,8 +27,8 @@ public class DrunkGolfApp {
 
     public void teeOff(int courseNum) {
         Course currentCourse = new Course(courseNum);
-        currentCourse.getCourse();
-        while(!currentCourse.isComplete()) {
+        currentCourse.buildCourse();
+        while (!currentCourse.isComplete()) {
             currentCourse.play();
         }
         currentCourse.getScoreCard(); // clear screen and maintain as header while playing
@@ -38,13 +38,13 @@ public class DrunkGolfApp {
         boolean validInput = false;
         int courseSize = 0;
 
-        while(!validInput) {
+        while (!validInput) {
             printRules();
             System.out.println("Enter amount of holes: ");
             String userInput = scanner.nextLine().trim();
             courseSize = Integer.parseInt(userInput);
-            if(userInput.matches("\\d{1,2}")) {
-                if(courseSize == 1 || courseSize == 9 || courseSize == 18) {
+            if (userInput.matches("\\d{1,2}")) {
+                if (courseSize == 1 || courseSize == 9 || courseSize == 18) {
                     validInput = true;
                 }
             }
@@ -55,7 +55,6 @@ public class DrunkGolfApp {
     private void printRules() {
         System.out.println("You can only enter: [1] [9] [18]");
     }
-
 
 
     private void endResults() {

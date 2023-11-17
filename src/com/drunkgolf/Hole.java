@@ -26,45 +26,40 @@ public class Hole {
     // method to update the distance after swing
     public void updateDistance(int distance) {
         distanceToHole = Math.abs(distanceToHole - distance);
-        System.out.printf("The hole is %s yards away.\n", distanceToHole);
         ++swingsTaken;
-
+        System.out.printf("The hole is %s yards away.\n", distanceToHole);
     }
 
-    public boolean holeComplete() {
+    boolean holeComplete() {
         boolean holeComplete = false;
-        if(distanceToHole < 8) {
+        if (distanceToHole < 8) {
             holeComplete = true;
             System.out.println("G O O D   J O B   B U D!");
         }
-        if(swingsTaken > getPar() + 1) {
-            endHole();
+        if (swingsTaken > getPar() + 1) {
             holeComplete = true;
             System.out.println("B A D   J O B   B U D");
         }
         return holeComplete;
     }
 
-    private boolean endHole() {
-        // TODO: adding tolerance for distance | if returning string.
-        return swingsTaken >= par + 2;
-    }
-
     public int getPar() {
         return par;
     }
 
-    private void setPar(double distance){
+    private void setPar(double distance) {
         // TODO: switch\if case to calculate par based on distance;
-        if(distance > 450) {
+        if (distance > 450) {
             par = 5;
-        }
-        else if( distance > 350) {
+        } else if (distance > 350) {
             par = 4;
-        }
-        else {
+        } else {
             par = 3;
         }
+    }
+
+    public int getInitialDistance() {
+        return (int) initialHoleDistance;
     }
 
     private int getSwingsTaken() {
@@ -75,9 +70,9 @@ public class Hole {
         return distanceToHole;
     }
 
-    private int generateHole(){
-         initialHoleDistance = Math.random() * (MAX_DISTANCE - MIN_DISTANCE + 1) + MIN_DISTANCE;
-        System.out.printf("The hole is %s yards away.\n", (int) initialHoleDistance);
+    private int generateHole() {
+        initialHoleDistance = Math.random() * (MAX_DISTANCE - MIN_DISTANCE + 1) + MIN_DISTANCE;
+        //System.out.printf("The hole is %s yards away.\n", (int) initialHoleDistance);
         return (int) initialHoleDistance;
     }
 }

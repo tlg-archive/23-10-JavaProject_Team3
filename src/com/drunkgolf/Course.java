@@ -1,8 +1,6 @@
 package com.drunkgolf;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Course {
     private final Scanner scanner = new Scanner(System.in);
@@ -23,17 +21,19 @@ public class Course {
 
     //methods
     public boolean isComplete() {
-        if(course.isEmpty()) {
+        if (course.isEmpty()) {
             complete = true;
         }
         return complete;
     }
 
-    public void getCourse(){
-        for (int i = 0; i < courseSize; i++){
+    public void buildCourse() {
+        for (int i = 0; i < courseSize; i++) {
             Hole hole = new Hole();
             course.add(hole);
         }
+        int holeCount = 1;
+        showCourse(holeCount);
     }
 
     public void play() {
@@ -41,7 +41,7 @@ public class Course {
         System.out.printf("\n\nThe hole is %s yards away.\n" +
                 "The par for the hole is: %s \n" +
                 "Score Card: %s\n", hole.getDistanceToHole(), hole.getPar(), getScore());
-        while(!hole.holeComplete()){
+        while (!hole.holeComplete()) {
             ClubType clubType = promptForClub();
             hole.updateDistance(clubType.swingClub(clubType));
         }
@@ -65,39 +65,62 @@ public class Course {
 
     public int getScore() {
         int sum = 0;
-        for(int score : scoreCard) {
+        for (int score : scoreCard) {
             sum += score;
         }
         return sum;
     }
-    private ClubType promptForClub(){
+
+    private ClubType promptForClub() {
         boolean validInput = false;
         ClubType club = null;
 
 
-        while(!validInput) {
-            System.out.println("Please choose: [D]river, [I]ron, [W]edge, [P]utter");
+        while (!validInput) {
+            System.out.println("Please choose: [D]river, [I]ron, [W]edge, [P]utter, [R]ange for club ranges.");
             String userInput = scanner.nextLine().trim().toUpperCase();
-            if(userInput.matches("[A-Z]")) {
-                if("D".equals(userInput)) {
+            if (userInput.matches("[A-Z]")) {
+                if ("D".equals(userInput)) {
                     club = ClubType.DRIVER;
                     validInput = true;
                 }
-                if("I".equals(userInput)){
+                if ("I".equals(userInput)) {
                     club = ClubType.IRON;
                     validInput = true;
                 }
-                if("W".equals(userInput)) {
+                if ("W".equals(userInput)) {
                     club = ClubType.WEDGE;
                     validInput = true;
                 }
-                if("P".equals(userInput)) {
+                if ("P".equals(userInput)) {
                     club = ClubType.PUTTER;
                     validInput = true;
+                }
+                if ("R".equals(userInput)) {
+                    System.out.println(
+                            "Driver Range: " + ClubType.DRIVER.getDriverRange() +
+                                    "\nIron Range: " + ClubType.IRON.getIronRange() +
+                                    "\nWedge Range: " + ClubType.WEDGE.getWedgeRange() +
+                                    "\nPutter Range: " + ClubType.PUTTER.getPutterRange()
+                    );
+
+                }
+                if ("C".equals(userInput)) {
+                    // TODO:
+                    int holeCount = 1;
+                    showCourse(holeCount);
+
                 }
             }
         }
         return club;
+    }
+
+    private void showCourse(int holeCount) {
+        for (Hole hole : course) {
+            System.out.printf("Hole Number %s: is %s yards away.\n", holeCount, hole.getInitialDistance());
+            holeCount++;
+        }
     }
 
     //toString
