@@ -29,6 +29,14 @@ public class Hole {
         distanceToHole -= distance;
     }
 
+    public boolean holeComplete() {
+        boolean holeComplete = false;
+        if(distanceToHole <= distanceToHole * 0.1 || swingsTaken == par + 2) {
+            holeComplete = true;
+        }
+        return holeComplete;
+    }
+
     private boolean endHole() {
         // TODO: adding tolerance for distance | if returning string.
         return swingsTaken >= par + 2;
