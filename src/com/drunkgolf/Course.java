@@ -2,12 +2,13 @@ package com.drunkgolf;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Course {
+    private final Scanner scanner = new Scanner(System.in);
 
     //fields
-    int courseSize = 1;
-    int totalPar = 3;
+    int courseSize;
     boolean complete = false;
 
     //ctor
@@ -15,56 +16,83 @@ public class Course {
         this.courseSize = courseSize;
     }
 
-    public Course(int courseSize, int totalPar) {
-        this(courseSize);
-        setTotalPar(totalPar);
-    }
 
     //lists
     List<Integer> scoreCard = new ArrayList<>();
-    List<Hole> holes = new ArrayList<>();
+    List<Hole> course = new ArrayList<>();
 
     //methods
-    public boolean isComplete() { // says course is complete after one hole is complete
-        if (Hole.isComplete = true) {
+    public boolean isComplete() {
+        if(course.isEmpty()) {
             complete = true;
-            scoreCard.add(Hole.score());
         }
         return complete;
     }
 
-    public void getHoles(){
+    public void getCourse(){
         for (int i = 0; i < courseSize; i++){
             Hole hole = new Hole();
-            holes.add(hole);
+            course.add(hole);
         }
-        System.out.println(holes);
     }
 
+    public void play() {
+        course.get(0);
+        while(!holeComplete){
+            ClubType clubType = promptForClub();
+            hole.updateDistance(clubType.swingClub(clubType));
+            getScoreCard();
+        }
+        scoreCard.add(hole.score());
+        course.remove(hole);
+
+    }
     //accessors
     public int getCourseSize() {
         return courseSize;
     }
 
-    public int getTotalPar() {
-        return totalPar;
-    }
 
     public void setCourseSize(int courseSize) {
         this.courseSize = courseSize;
     }
 
-    public void setTotalPar(int totalPar) {
-        this.totalPar = totalPar;
-    }
 
     public void getScoreCard() {
         System.out.println(scoreCard);
+    }
+    private ClubType promptForClub(){
+        boolean validInput = false;
+        ClubType club = null;
+        System.out.println("Please choose: [D]river, [I]ron, [W]edge, [P]utter");
+        String userInput = scanner.next().trim().toUpperCase();
+
+        while(!validInput) {
+            if(userInput.matches("[A-Z]")) {
+                if("D".equals(userInput)) {
+                    club = ClubType.DRIVER;
+                    validInput = true;
+                }
+                if("I".equals(userInput)){
+                    club = ClubType.IRON;
+                    validInput = true;
+                }
+                if("W".equals(userInput)) {
+                    club = ClubType.WEDGE;
+                    validInput = true;
+                }
+                if("P".equals(userInput)) {
+                    club = ClubType.PUTTER;
+                    validInput = true;
+                }
+            }
+        }
+        return club;
     }
 
     //toString
     @Override
     public String toString() {
-        return getClass().getSimpleName() + ", holes= " + getCourseSize() + ", par= " + getTotalPar();
+        return getClass().getSimpleName() + ", holes= " + getCourseSize();
     }
 }
