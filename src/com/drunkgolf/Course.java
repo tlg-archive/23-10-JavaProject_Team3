@@ -1,9 +1,12 @@
 package com.drunkgolf;
 
 import java.util.*;
+import com.apps.util.Prompter;
 
 public class Course {
     private final Scanner scanner = new Scanner(System.in);
+    private final Prompter prompter = new Prompter(scanner);
+
 
     //fields
     int courseSize;
@@ -43,6 +46,7 @@ public class Course {
                 "Score Card: %s\n", hole.getDistanceToHole(), hole.getPar(), getScore());
         while (!hole.holeComplete()) {
             ClubType clubType = promptForClub();
+            System.out.println("Swinging with your " + clubType.toString(clubType));
             hole.updateDistance(clubType.swingClub(clubType));
         }
         scoreCard.add(hole.score());

@@ -39,19 +39,23 @@ public class Hole {
         if (distanceToHole < WIN_TOLERANCE) {
             holeComplete = true;
             if (swingsTaken == HOLE_IN_ONE) {
-                System.out.println("HOLE IN ONE!!!!!!!!\n");
-            } else if (score() == EAGLE.getEagle()) {
-                System.out.println("KA-KAW\n");
-            } else if (score() == BIRDIE.getBirdie()) {
-                System.out.println("Birdie\n");
-            } else if (score() == PAR.getPar()) {
-                System.out.println("Par\n");
-            } else if (score() == BOGEY.getBogey()) {
-                System.out.println("Bogeyyyyyyy\n");
-            } else if (score() == DOUBLE_BOGEY.getDoubleBogey()) {
-                System.out.println("Double Bogey\n");
+                System.out.println("HOLE IN ONE!!!!!!!!");
             }
-        } else if (swingsTaken > getPar() + PAR_TOLERANCE) {
+            else if(score() == ALBATROSS.getAlbatross()) {
+                System.out.println("! I'M AN ALBATROSS !");
+            }
+            else if (score() == EAGLE.getEagle()) {
+                System.out.println("KA-KAW");
+            } else if (score() == BIRDIE.getBirdie()) {
+                System.out.println("Birdie");
+            } else if (score() == PAR.getPar()) {
+                System.out.println("Par");
+            } else if (score() == BOGEY.getBogey()) {
+                System.out.println("Bogeyyyyyyy");
+            } else if (score() == DOUBLE_BOGEY.getDoubleBogey()) {
+                System.out.println("Double Bogey");
+            }
+        } else if (swingsTaken == getPar() + PAR_TOLERANCE) {
             holeComplete = true;
             System.out.println("TRASH BRUH ;-;\n");
         }

@@ -2,6 +2,7 @@ package com.drunkgolf.app;
 
 import com.drunkgolf.ClubType;
 import com.drunkgolf.Course;
+import com.apps.util.Console;
 
 import java.util.Scanner;
 
@@ -9,6 +10,7 @@ import java.util.Scanner;
 public class DrunkGolfApp {
     private final Scanner scanner = new Scanner(System.in);
     private ClubType club;
+    private int score;
 
 
     public void execute() {
@@ -50,6 +52,8 @@ public class DrunkGolfApp {
         while (!currentCourse.isComplete()) {
             currentCourse.play();
         }
+        Console.clear();
+        score = currentCourse.getScore();
         System.out.println(currentCourse.getScore());
     }
 
@@ -77,7 +81,7 @@ public class DrunkGolfApp {
     }
 
     private void printRules() {
-        System.out.println("You can only enter: [1] [9] [18], or [ERROR]");
+        System.out.println("You can only enter: [1] [9] [18]");
     }
 
     public void bonusLevel() {
@@ -114,10 +118,37 @@ public class DrunkGolfApp {
 
     private void endResults() {
 
-        System.out.println();
-        System.out.println("+ + + + + + + + + + + + + +");
-        System.out.println("Y O U   A R E   T R A S H");
-        System.out.println("+ + + + + + + + + + + + + +");
+        if(score > 0) {
+            System.out.println();
+            System.out.println("+ + + + + + + + + + + + + +");
+            System.out.println("Y O U   A R E   T R A S H");
+            System.out.println("+ + + + + + + + + + + + + +");
+        }
+        if(score == 0) {
+            System.out.println();
+            System.out.println("+ + + + + + + + + + + +");
+            System.out.println("Y O U   A R E   M I D");
+            System.out.println("+ + + + + + + + + + + +");
+        }
+        if(score < 0) {
+            System.out.println();
+            System.out.println("+ + + + + + + + + + + + + +");
+            System.out.println("Y O U   W I N - K A C H O W");
+            System.out.println("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣤⣤⣴⣶⣶⣿⠿⠿⠿⢿⣶⣶⣤⣀⣀⣀⣠⣤⣤⣦⠀⠀\n" +
+                    "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣴⣿⡿⠿⠛⠛⠉⠉⠀⠀⠀⠀⠀⠈⢿⡏⠉⢻⣿⣿⣿⣿⣿⡆⠀\n" +
+                    "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣼⠋⠀⠀⠀⣴⣶⡄⠀⠀⢰⣿⠀⠀⠀⠘⣷⡀⠀⢹⣿⣿⣿⣿⣿⠀\n" +
+                    "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣾⣇⣀⣤⣤⣤⣾⣿⣶⣶⣶⣿⣿⣿⣿⣿⣿⣿⣷⣾⣿⣿⣿⣿⣿⣿⡆\n" +
+                    "⠀⠀⣠⣴⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠿⠛⠉⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠃\n" +
+                    "⠀⣰⠋⠛⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣏⣁⣀⣠⣤⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠀\n" +
+                    "⣰⣷⣦⣤⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠟⠛⣿⣿⣿⣿⣿⣿⣿⠁⠈⠙⢿⣿⣿⣿⣿⠀⣿⠀\n" +
+                    "⣿⣿⣿⣿⣿⣷⡀⠀⠈⠉⠉⠉⠉⠁⠀⠀⠀⠀⢀⣼⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠘⣿⣿⣿⣿⠀⣿⠀\n" +
+                    "⣿⣿⣿⣿⣿⣿⣷⣤⣀⣀⣀⣀⣀⣀⣀⣠⣤⣾⣿⣿⣿⣿⣿⣿⣿⣿⡟⠀⠀⠀⢀⣿⣿⣿⣿⣀⣿⠀\n" +
+                    "⠹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⢀⣼⣿⠛⠛⠛⠛⠃⠀\n" +
+                    "⠀⠈⠙⠻⢿⣿⣿⣿⠿⠟⠛⠛⠛⠛⠛⠉⠉⠉⠉⠉⠀⠈⠻⣿⣿⣿⣷⣶⣶⣿⡿⠁⠀⠀⠀⠀⠀⠀\n" +
+                    "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀     ⠈⠉⠉⠉⠉⠉⠉⠀⠀⠀⠀⠀⠀⠀⠀");
+        }
+
+
     }
 
 
