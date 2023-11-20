@@ -37,13 +37,24 @@ public class Hole {
         boolean holeComplete = false;
         if (distanceToHole < TOLERANCE) {
             holeComplete = true;
-            System.out.println("G O O D   J O B   B U D!");
+            printChar("G O O D   J O B   B U D!");
         }
         else if (swingsTaken > getPar() + 1) {
             holeComplete = true;
-            System.out.println("B A D   J O B   B U D");
+            printChar("B A D   J O B   B U D");
         }
         return holeComplete;
+    }
+
+    private void printChar(String text) {
+        for (char ch : text.toCharArray()) {
+            System.out.print(ch);
+            try {
+                Thread.sleep(70);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public int getPar() {
