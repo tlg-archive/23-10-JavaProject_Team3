@@ -1,9 +1,13 @@
 package com.drunkgolf;
 
+import static com.drunkgolf.Scoring.*;
+
 public class Hole {
     private static final int MIN_DISTANCE = 100;
     private static final int MAX_DISTANCE = 500;
-    private static final int TOLERANCE = 8;
+    private static final int WIN_TOLERANCE = 8;
+    private static final int PAR_TOLERANCE = 2;
+    private static final int HOLE_IN_ONE = 1;
 
 
     private int par;
@@ -13,8 +17,6 @@ public class Hole {
 
 
     // ctor
-
-
     Hole() {
         this.distanceToHole = generateHole();
         setPar(initialHoleDistance);
@@ -22,26 +24,36 @@ public class Hole {
 
     // score
     public int score() {
-        return swingsTaken - par;
-
+        return getSwingsTaken() - getPar();
     }
 
     // method to update the distance after swing
     public void updateDistance(int distance) {
-        distanceToHole = Math.abs(distanceToHole - distance);
         ++swingsTaken;
+        distanceToHole = Math.abs(distanceToHole - distance);
         System.out.printf("The hole is %s yards away.\n", distanceToHole);
     }
 
     boolean holeComplete() {
         boolean holeComplete = false;
-        if (distanceToHole < TOLERANCE) {
+        if (distanceToHole < WIN_TOLERANCE) {
             holeComplete = true;
-            printChar("G O O D   J O B   B U D!");
-        }
-        else if (swingsTaken > getPar() + 1) {
+            if (swingsTaken == HOLE_IN_ONE) {
+                System.out.println("HOLE IN ONE!!!!!!!!\n");
+            } else if (score() == EAGLE.getEagle()) {
+                System.out.println("KA-KAW\n");
+            } else if (score() == BIRDIE.getBirdie()) {
+                System.out.println("Birdie\n");
+            } else if (score() == PAR.getPar()) {
+                System.out.println("Par\n");
+            } else if (score() == BOGEY.getBogey()) {
+                System.out.println("Bogeyyyyyyy\n");
+            } else if (score() == DOUBLE_BOGEY.getDoubleBogey()) {
+                System.out.println("Double Bogey\n");
+            }
+        } else if (swingsTaken > getPar() + PAR_TOLERANCE) {
             holeComplete = true;
-            printChar("B A D   J O B   B U D");
+            System.out.println("TRASH BRUH ;-;\n");
         }
         return holeComplete;
     }
@@ -62,7 +74,6 @@ public class Hole {
     }
 
     private void setPar(double distance) {
-        // TODO: switch\if case to calculate par based on distance;
         if (distance > 450) {
             par = 5;
         } else if (distance > 350) {

@@ -11,7 +11,6 @@ public enum ClubType {
     public int maxRange;
 
     ClubType(int minRange, int maxRange) {
-
         this.minRange = minRange;
         this.maxRange = maxRange;
     }
