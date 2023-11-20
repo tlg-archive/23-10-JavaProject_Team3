@@ -14,15 +14,34 @@ public class DrunkGolfApp {
     public void execute() {
         welcome();
         int courseNum = promptForCourse();
-        teeOff(courseNum);
-        endResults();
 
+        if (courseNum == -1) {
+            bonusLevel();
+        } else {
+            teeOff(courseNum);
+            endResults();
+        }
     }
 
     public void welcome() {
-        System.out.println("+ + + + + + + + + + + + + + + + + + + + +");
-        System.out.println("W E L C O M E   T O   D R U N K   G O L F");
-        System.out.println("+ + + + + + + + + + + + + + + + + + + + +");
+        printChar("+ + + + + + + + + + + + + + + + + + + + +\n");
+        printChar("W E L C O M E   T O   D R U N K   G O L F\n");
+        printChar("+ + + + + + + + + + + + + + + + + + + + +\n");
+    }
+
+    private void printChar(String text) {
+        for (char ch : text.toCharArray()) {
+            System.out.print(ch);
+            try {
+                Thread.sleep(20);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private boolean isEnterPressed() {
+        return scanner.nextLine().equalsIgnoreCase("");
     }
 
     public void teeOff(int courseNum) {
@@ -42,6 +61,11 @@ public class DrunkGolfApp {
             printRules();
             System.out.println("Enter amount of holes: ");
             String userInput = scanner.nextLine().trim();
+
+            if (userInput.equalsIgnoreCase("b")) {
+                return -1;
+            }
+
             courseSize = Integer.parseInt(userInput);
             if (userInput.matches("\\d{1,2}")) {
                 if (courseSize == 1 || courseSize == 9 || courseSize == 18) {
@@ -53,7 +77,38 @@ public class DrunkGolfApp {
     }
 
     private void printRules() {
-        System.out.println("You can only enter: [1] [9] [18]");
+        System.out.println("You can only enter: [1] [9] [18], or [ERROR]");
+    }
+
+    public void bonusLevel() {
+        printChar("Welcome to the Bonus Level!");
+        System.out.println("Press the 'Space' bar as many times as you can in 5 seconds to hit the ball hard!");
+
+        for (int i = 3; i > 0; i--) {
+            System.out.println("Starting in " + i);
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        System.out.println("go!");
+
+        long startTime = System.currentTimeMillis();
+        long endTime = startTime + 5000;
+
+
+        int enterCount = 0;
+
+        while (System.currentTimeMillis() < endTime) {
+            if (isEnterPressed()) { //make this method
+                enterCount++;
+            }
+        }
+
+        int mashedDistance = enterCount * 15;
+        System.out.println("Distance: " + mashedDistance + " yards");
     }
 
 
