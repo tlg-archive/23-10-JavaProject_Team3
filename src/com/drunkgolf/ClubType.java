@@ -17,7 +17,7 @@ public enum ClubType {
 
     public int swingClub(ClubType club) {
         double rand = Math.random() * (club.maxRange - club.minRange + 1) + club.minRange;
-        System.out.printf("Your ball went %.2f yards!\n", rand);
+        System.out.printf("\nYour ball went %.2f yards!\n", rand);
         return (int) rand;
     }
 
@@ -35,5 +35,9 @@ public enum ClubType {
 
     String getPutterRange() {
         return ClubType.PUTTER.minRange + " - " + ClubType.PUTTER.maxRange;
+    }
+
+    public String toString(ClubType clubType) {
+        return clubType.toString().toLowerCase();
     }
 }
