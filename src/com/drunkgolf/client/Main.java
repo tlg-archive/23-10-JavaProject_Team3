@@ -7,5 +7,4 @@ class Main {
         DrunkGolfApp app = new DrunkGolfApp();
         app.execute();
     }
-
 }
