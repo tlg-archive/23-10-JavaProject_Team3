@@ -15,7 +15,7 @@ public enum ClubType {
         this.maxRange = maxRange;
     }
 
-    public int swingClub(ClubType club) {
+    public int swingClub(ClubType club) { //returns random num between min and max to tell you how far your ball went
         double rand = Math.random() * (club.maxRange - club.minRange + 1) + club.minRange;
         System.out.printf("\nYour ball went %.2f yards!\n", rand);
         return (int) rand;
