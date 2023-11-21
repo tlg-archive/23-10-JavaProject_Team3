@@ -1,6 +1,6 @@
 package com.drunkgolf;
 
-enum Scoring {
+enum HoleResult {
     ALBATROSS(-3),
     EAGLE(-2),
     BIRDIE(-1),
@@ -10,7 +10,7 @@ enum Scoring {
 
     private int score;
 
-    Scoring(int score) {
+    HoleResult(int score) {
         this.score = score;
     }
 

@@ -1,7 +1,5 @@
 package com.drunkgolf;
 
-import static com.drunkgolf.Scoring.*;
-
 public class Hole {
     static final int MIN_DISTANCE = 100;
     static final int MAX_DISTANCE = 500;
@@ -22,6 +20,7 @@ public class Hole {
         this.distanceToHole = generateHole();
         setPar(initialHoleDistance);
     }
+
     // score
     public int score() {
         return getSwingsTaken() - getPar();
@@ -29,7 +28,7 @@ public class Hole {
 
     // method to update the distance after swing
     public void updateDistance(int distance) {
-        if(distanceToHole > WIN_TOLERANCE) {
+        if (distanceToHole > WIN_TOLERANCE) {
             ++swingsTaken;
             distanceToHole = Math.abs(distanceToHole - distance);
         }
