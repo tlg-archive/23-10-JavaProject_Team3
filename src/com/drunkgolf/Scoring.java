@@ -15,26 +15,26 @@ enum Scoring {
     }
 
     int getAlbatross() {
-        return Scoring.ALBATROSS.score;
+        return ALBATROSS.score;
     }
 
     int getEagle() {
-        return Scoring.EAGLE.score;
+        return EAGLE.score;
     }
 
     int getBirdie() {
-        return Scoring.BIRDIE.score;
+        return BIRDIE.score;
     }
 
     int getPar() {
-        return Scoring.PAR.score;
+        return PAR.score;
     }
 
     int getBogey() {
-        return Scoring.BOGEY.score;
+        return BOGEY.score;
     }
 
     int getDoubleBogey() {
-        return Scoring.DOUBLE_BOGEY.score;
+        return DOUBLE_BOGEY.score;
     }
 }

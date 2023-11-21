@@ -21,19 +21,19 @@ public enum ClubType {
         return (int) rand;
     }
 
-    String getDriverRange() {
+    public String getDriverRange() {
         return ClubType.DRIVER.minRange + " - " + ClubType.DRIVER.maxRange;
     }
 
-    String getIronRange() {
+    public String getIronRange() {
         return ClubType.IRON.minRange + " - " + ClubType.IRON.maxRange;
     }
 
-    String getWedgeRange() {
+    public String getWedgeRange() {
         return ClubType.WEDGE.minRange + " - " + ClubType.WEDGE.maxRange;
     }
 
-    String getPutterRange() {
+    public String getPutterRange() {
         return ClubType.PUTTER.minRange + " - " + ClubType.PUTTER.maxRange;
     }
 

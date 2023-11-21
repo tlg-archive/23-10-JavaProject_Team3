@@ -3,11 +3,11 @@ package com.drunkgolf;
 import static com.drunkgolf.Scoring.*;
 
 public class Hole {
-    private static final int MIN_DISTANCE = 100;
-    private static final int MAX_DISTANCE = 500;
-    private static final int WIN_TOLERANCE = 8;
-    private static final int PAR_TOLERANCE = 2;
-    private static final int HOLE_IN_ONE = 1;
+    static final int MIN_DISTANCE = 100;
+    static final int MAX_DISTANCE = 500;
+    static final int WIN_TOLERANCE = 8;
+    static final int PAR_TOLERANCE = 2;
+    static final int HOLE_IN_ONE = 1;
 
 
     private int par;
@@ -17,11 +17,11 @@ public class Hole {
 
 
     // ctor
+
     Hole() {
         this.distanceToHole = generateHole();
         setPar(initialHoleDistance);
     }
-
     // score
     public int score() {
         return getSwingsTaken() - getPar();
@@ -29,32 +29,16 @@ public class Hole {
 
     // method to update the distance after swing
     public void updateDistance(int distance) {
-        ++swingsTaken;
-        distanceToHole = Math.abs(distanceToHole - distance);
-        System.out.printf("The hole is %s yards away.\n", distanceToHole);
+        if(distanceToHole > WIN_TOLERANCE) {
+            ++swingsTaken;
+            distanceToHole = Math.abs(distanceToHole - distance);
+        }
     }
 
     boolean holeComplete() {
         boolean holeComplete = false;
-        if (distanceToHole < WIN_TOLERANCE) {
+        if (distanceToHole <= WIN_TOLERANCE) {
             holeComplete = true;
-            if (swingsTaken == HOLE_IN_ONE) {
-                System.out.println("HOLE IN ONE!!!!!!!!");
-            }
-            else if(score() == ALBATROSS.getAlbatross()) {
-                System.out.println("! I'M AN ALBATROSS !");
-            }
-            else if (score() == EAGLE.getEagle()) {
-                System.out.println("KA-KAW");
-            } else if (score() == BIRDIE.getBirdie()) {
-                System.out.println("Birdie");
-            } else if (score() == PAR.getPar()) {
-                System.out.println("Par");
-            } else if (score() == BOGEY.getBogey()) {
-                System.out.println("Bogeyyyyyyy");
-            } else if (score() == DOUBLE_BOGEY.getDoubleBogey()) {
-                System.out.println("Double Bogey");
-            }
         } else if (swingsTaken == getPar() + PAR_TOLERANCE) {
             holeComplete = true;
             System.out.println("TRASH BRUH ;-;\n");
@@ -87,11 +71,12 @@ public class Hole {
         }
     }
 
+
     public int getInitialDistance() {
         return (int) initialHoleDistance;
     }
 
-    private int getSwingsTaken() {
+    public int getSwingsTaken() {
         return swingsTaken;
     }
 
