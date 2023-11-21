@@ -25,7 +25,7 @@ public class Course {
 
     //ctor
     public Course(int courseSize) {
-        this.courseSize = courseSize;
+        setCourseSize(courseSize);
     }
 
     //lists
@@ -33,7 +33,7 @@ public class Course {
     List<Hole> course = new ArrayList<>();
 
     //methods
-    public void buildCourse() {
+    public void buildCourse() { //adds Holes to course list (1, 9, 18)
         for (int i = 0; i < courseSize; i++) {
             Hole hole = new Hole();
             course.add(hole);
@@ -42,7 +42,7 @@ public class Course {
         showCourse(holeCount);
     }
 
-    public Hole getHole() {
+    public Hole getHole() { //gets next hole and gives information about it
         hole = course.get(0);
         printScore();
         try {
@@ -72,7 +72,7 @@ public class Course {
 
     }
 
-    public void currentHoleInfo() {
+    public void currentHoleInfo() { //tells you information about the current hole and prints ascii
         hole = course.get(0);
         printScore();
         try {
@@ -94,6 +94,8 @@ public class Course {
     }
 
     public void setHoleComplete() {
+        //gives feedback based on your score or swingsTaken adds your score for the hole to your scorecard and
+        //      removes the hole form the course list
 
         if (getHoleComplete()) {
             if (hole.getSwingsTaken() == Hole.HOLE_IN_ONE) {
@@ -117,7 +119,7 @@ public class Course {
     }
 
     //accessors
-    public boolean isComplete() {
+    public boolean isComplete() { //sets course to complete
         if (course.isEmpty()) {
             complete = true;
         }
@@ -136,7 +138,7 @@ public class Course {
         return scoreCard;
     }
 
-    public int getScore() {
+    public int getScore() { //keeps a running talley of your overall score
         int sum = 0;
         for (int score : scoreCard) {
             sum += score;
@@ -145,13 +147,14 @@ public class Course {
     }
 
     private void showCourse(int holeCount) {
+        //prints entire course by assigning the hole a number and putting the initialDistance beside it
         for (Hole hole : course) {
             System.out.printf("Hole Number %s: is %s yards away.\n", holeCount, hole.getInitialDistance());
             holeCount++;
         }
     }
 
-    public boolean getHoleComplete() {
+    public boolean getHoleComplete() { //checks if current hole in the hole list is complete
         return hole.holeComplete();
     }
 
@@ -165,7 +168,7 @@ public class Course {
         }
     }
 
-    private void printClubRanges() {
+    private void printClubRanges() { //displays the ranges of each club for the end user
         System.out.println("-----------------------");
         System.out.println(
                 "Driver Range: " + DRIVER.getDriverRange() +
@@ -174,11 +177,5 @@ public class Course {
                         "\nPutter Range: " + PUTTER.getPutterRange()
         );
         System.out.println("-----------------------");
-    }
-
-    //toString
-    @Override
-    public String toString() {
-        return getClass().getSimpleName() + ", holes= " + getCourseSize();
     }
 }
