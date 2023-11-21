@@ -22,19 +22,19 @@ public enum ClubType {
     }
 
     public String getDriverRange() {
-        return ClubType.DRIVER.minRange + " - " + ClubType.DRIVER.maxRange;
+        return DRIVER.minRange + " - " + ClubType.DRIVER.maxRange;
     }
 
     public String getIronRange() {
-        return ClubType.IRON.minRange + " - " + ClubType.IRON.maxRange;
+        return IRON.minRange + " - " + ClubType.IRON.maxRange;
     }
 
     public String getWedgeRange() {
-        return ClubType.WEDGE.minRange + " - " + ClubType.WEDGE.maxRange;
+        return WEDGE.minRange + " - " + ClubType.WEDGE.maxRange;
     }
 
     public String getPutterRange() {
-        return ClubType.PUTTER.minRange + " - " + ClubType.PUTTER.maxRange;
+        return PUTTER.minRange + " - " + ClubType.PUTTER.maxRange;
     }
 
     public String toString(ClubType clubType) {
