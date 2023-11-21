@@ -12,7 +12,6 @@ import java.util.Scanner;
 
 // Controller
 public class DrunkGolfApp {
-    private final Scanner scanner = new Scanner(System.in);
     private final Prompter prompter = new Prompter(new Scanner(System.in));
     private ClubType club;
     private int score;
@@ -22,10 +21,9 @@ public class DrunkGolfApp {
     public void execute() {
         welcome();
         int courseNum = promptForCourse();
-        if (courseNum == -1) {
+        if (courseNum == 20) {
             bonusLevel();
-        }
-        else {
+        } else {
             teeOff(courseNum);
             endResults();
         }
@@ -49,7 +47,8 @@ public class DrunkGolfApp {
     }
 
     private boolean isEnterPressed() {
-        return scanner.nextLine().equalsIgnoreCase("");
+        return prompter.prompt("").equalsIgnoreCase("");
+        //return scanner.nextLine().equalsIgnoreCase("");
     }
 
     public void teeOff(int courseNum) {
@@ -58,7 +57,7 @@ public class DrunkGolfApp {
         waitAndClear();
         while (!currentCourse.isComplete()) {
             currentCourse.getHole();
-            while(!currentCourse.getHoleComplete()) {
+            while (!currentCourse.getHoleComplete()) {
                 club = promptForClub();
                 currentCourse.play(club);
                 waitAndClear();
@@ -84,20 +83,19 @@ public class DrunkGolfApp {
         while (!validInput) {
             printRules();
             String userInput = prompter.prompt("Enter amount of holes: ").trim();
-
-            if (userInput.equalsIgnoreCase("b")) {
-                return -1;
-            }
-
+//            if (userInput.equalsIgnoreCase("b")) {
+//                return -1;
+//            }
             courseSize = Integer.parseInt(userInput);
             if (userInput.matches("\\d{1,2}")) {
-                if (courseSize == 1 || courseSize == 9 || courseSize == 18) {
+                if (courseSize == 1 || courseSize == 9 || courseSize == 18 || courseSize == 20) {
                     validInput = true;
                 }
             }
         }
         return courseSize;
     }
+
     private ClubType promptForClub() {
         boolean validInput = false;
         ClubType club = null;
@@ -139,10 +137,10 @@ public class DrunkGolfApp {
     }
 
     private void printRules() {
-        System.out.println("You can only enter: [1] [9] [18]");
+        System.out.println("You can only enter [1] [9] [18]: ");
     }
 
-    public void bonusLevel() {
+    private void bonusLevel() {
         printChar("Welcome to the Bonus Level!\n");
         System.out.println("Press the [Enter] as many times as you can in 5 seconds to hit the ball hard!");
         waitAndClear();
@@ -177,24 +175,24 @@ public class DrunkGolfApp {
 
     private void endResults() {
 
-        if(score > 0) {
-            System.out.println("Score card: " +results);
+        if (score > 0) {
+            System.out.println("Score card: " + results);
             System.out.println(score);
             System.out.println();
             System.out.println("+ + + + + + + + + + + + + +");
             System.out.println("Y O U   A R E   T R A S H");
             System.out.println("+ + + + + + + + + + + + + +");
         }
-        if(score == 0) {
-            System.out.println("Score card: " +results);
+        if (score == 0) {
+            System.out.println("Score card: " + results);
             System.out.println(score);
             System.out.println();
             System.out.println("+ + + + + + + + + + + +");
             System.out.println("Y O U   A R E   M I D");
             System.out.println("+ + + + + + + + + + + +");
         }
-        if(score < 0) {
-            System.out.println("Score card: " +results);
+        if (score < 0) {
+            System.out.println("Score card: " + results);
             System.out.println(score);
             System.out.println("+ + + + + + + + + + + + + +");
             System.out.println("Y O U   W I N - K A C H O W");
