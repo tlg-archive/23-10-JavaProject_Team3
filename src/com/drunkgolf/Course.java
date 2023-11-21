@@ -2,6 +2,8 @@ package com.drunkgolf;
 
 import java.util.*;
 
+import static com.drunkgolf.ClubType.*;
+import static com.drunkgolf.ClubType.PUTTER;
 import static com.drunkgolf.HoleResult.*;
 import static com.drunkgolf.HoleResult.DOUBLE_BOGEY;
 
@@ -46,6 +48,12 @@ public class Course {
         System.out.printf("\n\nHole %s: is %s yards away.\n" +
                 "The par for the hole is: %s \n" +
                 "Score Card: %s\n", scoreCard.size() + 1, hole.getDistanceToHole(), hole.getPar(), getScore());
+        System.out.println(
+                "Driver Range: " + DRIVER.getDriverRange() +
+                        "\nIron Range: " + IRON.getIronRange() +
+                        "\nWedge Range: " + WEDGE.getWedgeRange() +
+                        "\nPutter Range: " + PUTTER.getPutterRange()
+        );
         holeComplete = false;
         return hole;
     }
@@ -58,6 +66,12 @@ public class Course {
                     "The par for the hole is: %s \n" +
                     "Lying: %s\n" +
                     "Score Card: %s\n", scoreCard.size() + 1, hole.getDistanceToHole(), hole.getPar(), hole.getSwingsTaken() + 1, getScore());
+            System.out.println(
+                    "Driver Range: " + DRIVER.getDriverRange() +
+                            "\nIron Range: " + IRON.getIronRange() +
+                            "\nWedge Range: " + WEDGE.getWedgeRange() +
+                            "\nPutter Range: " + PUTTER.getPutterRange()
+            );
         } else {
             System.out.printf("\n\nScore Card: %s\n", getScore());
         }
