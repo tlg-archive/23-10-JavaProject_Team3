@@ -1,5 +1,11 @@
 package com.drunkgolf;
 
+import com.apps.util.Console;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.*;
 
 import static com.drunkgolf.ClubType.*;
@@ -14,25 +20,19 @@ public class Course {
     boolean complete = false;
     boolean holeComplete = false;
     Hole hole;
+    private Path golfTeeAscii = Path.of("art/golfteeAscii.txt");
+    private Path golfSwingAscii = Path.of("art/golfswingAscii.txt");
 
     //ctor
     public Course(int courseSize) {
         this.courseSize = courseSize;
     }
 
-
     //lists
     List<Integer> scoreCard = new ArrayList<>();
     List<Hole> course = new ArrayList<>();
 
     //methods
-    public boolean isComplete() {
-        if (course.isEmpty()) {
-            complete = true;
-        }
-        return complete;
-    }
-
     public void buildCourse() {
         for (int i = 0; i < courseSize; i++) {
             Hole hole = new Hole();
@@ -45,43 +45,51 @@ public class Course {
     public Hole getHole() {
         hole = course.get(0);
         printScore();
+        try {
+            List<String> asciiArt = Files.readAllLines(golfTeeAscii);
+            printAscii(asciiArt);
+        } catch (IOException e) {
+
+        }
         System.out.printf("\n\nHole %s: is %s yards away.\n" +
                 "The par for the hole is: %s \n" +
                 "Score Card: %s\n", scoreCard.size() + 1, hole.getDistanceToHole(), hole.getPar(), getScore());
-        System.out.println(
-                "Driver Range: " + DRIVER.getDriverRange() +
-                        "\nIron Range: " + IRON.getIronRange() +
-                        "\nWedge Range: " + WEDGE.getWedgeRange() +
-                        "\nPutter Range: " + PUTTER.getPutterRange()
-        );
+        printClubRanges();
         holeComplete = false;
         return hole;
+    }
+
+    public void play(ClubType clubType) {
+        Console.clear();
+        System.out.println("Swinging with your " + clubType.toString(clubType));
+        try {
+            List<String> asciiArt = Files.readAllLines(golfSwingAscii);
+            printAscii(asciiArt);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        hole.updateDistance(clubType.swingClub(clubType));
+
     }
 
     public void currentHoleInfo() {
         hole = course.get(0);
         printScore();
+        try {
+            List<String> asciiArt = Files.readAllLines(golfTeeAscii);
+            printAscii(asciiArt);
+        } catch (IOException e) {
+        }
+
         if (!hole.holeComplete()) {
             System.out.printf("\n\nHole %s: is %s yards away.\n" +
                     "The par for the hole is: %s \n" +
                     "Lying: %s\n" +
                     "Score Card: %s\n", scoreCard.size() + 1, hole.getDistanceToHole(), hole.getPar(), hole.getSwingsTaken() + 1, getScore());
-            System.out.println(
-                    "Driver Range: " + DRIVER.getDriverRange() +
-                            "\nIron Range: " + IRON.getIronRange() +
-                            "\nWedge Range: " + WEDGE.getWedgeRange() +
-                            "\nPutter Range: " + PUTTER.getPutterRange()
-            );
+            printClubRanges();
         } else {
             System.out.printf("\n\nScore Card: %s\n", getScore());
         }
-
-    }
-
-    public void play(ClubType clubType) {
-
-        System.out.println("Swinging with your " + clubType.toString(clubType));
-        hole.updateDistance(clubType.swingClub(clubType));
 
     }
 
@@ -109,6 +117,13 @@ public class Course {
     }
 
     //accessors
+    public boolean isComplete() {
+        if (course.isEmpty()) {
+            complete = true;
+        }
+        return complete;
+    }
+
     public int getCourseSize() {
         return courseSize;
     }
@@ -142,6 +157,23 @@ public class Course {
 
     private void printScore() {
         System.out.println("Score: " + scoreCard);
+    }
+
+    private void printAscii(List<String> asciiArt) {
+        for (String line : asciiArt) {
+            System.out.println(line);
+        }
+    }
+
+    private void printClubRanges() {
+        System.out.println("-----------------------");
+        System.out.println(
+                "Driver Range: " + DRIVER.getDriverRange() +
+                        "\nIron Range: " + IRON.getIronRange() +
+                        "\nWedge Range: " + WEDGE.getWedgeRange() +
+                        "\nPutter Range: " + PUTTER.getPutterRange()
+        );
+        System.out.println("-----------------------");
     }
 
     //toString

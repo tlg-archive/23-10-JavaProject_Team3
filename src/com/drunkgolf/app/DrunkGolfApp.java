@@ -35,22 +35,6 @@ public class DrunkGolfApp {
         printChar("+ + + + + + + + + + + + + + + + + + + + +\n");
     }
 
-    private void printChar(String text) {
-        for (char ch : text.toCharArray()) {
-            System.out.print(ch);
-            try {
-                Thread.sleep(20);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    private boolean isEnterPressed() {
-        return prompter.prompt("").equalsIgnoreCase("");
-        //return scanner.nextLine().equalsIgnoreCase("");
-    }
-
     public void teeOff(int courseNum) {
         Course currentCourse = new Course(courseNum);
         currentCourse.buildCourse();
@@ -83,9 +67,6 @@ public class DrunkGolfApp {
         while (!validInput) {
             printRules();
             String userInput = prompter.prompt("Enter amount of holes: ").trim();
-//            if (userInput.equalsIgnoreCase("b")) {
-//                return -1;
-//            }
             courseSize = Integer.parseInt(userInput);
             if (userInput.matches("\\d{1,2}")) {
                 if (courseSize == 1 || courseSize == 9 || courseSize == 18 || courseSize == 20) {
@@ -102,7 +83,7 @@ public class DrunkGolfApp {
 
 
         while (!validInput) {
-            String userInput = prompter.prompt("Please choose: [D]river, [I]ron, [W]edge, [P]utter, [R]ange for club ranges.").trim().toUpperCase();
+            String userInput = prompter.prompt("Please choose: [D]river, [I]ron, [W]edge, [P]utter.").trim().toUpperCase();
             if (userInput.matches("[A-Z]")) {
                 if ("D".equals(userInput)) {
                     club = ClubType.DRIVER;
@@ -119,15 +100,6 @@ public class DrunkGolfApp {
                 if ("P".equals(userInput)) {
                     club = ClubType.PUTTER;
                     validInput = true;
-                }
-                if ("R".equals(userInput)) {
-                    System.out.println(
-                            "Driver Range: " + DRIVER.getDriverRange() +
-                                    "\nIron Range: " + IRON.getIronRange() +
-                                    "\nWedge Range: " + WEDGE.getWedgeRange() +
-                                    "\nPutter Range: " + PUTTER.getPutterRange()
-                    );
-
                 }
             }
         }
@@ -170,6 +142,21 @@ public class DrunkGolfApp {
         System.out.println("Distance: " + mashedDistance + " yards");
     }
 
+    private boolean isEnterPressed() {
+        return prompter.prompt("").equalsIgnoreCase("");
+        //return scanner.nextLine().equalsIgnoreCase("");
+    }
+
+    private void printChar(String text) {
+        for (char ch : text.toCharArray()) {
+            System.out.print(ch);
+            try {
+                Thread.sleep(20);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
     private void endResults() {
 
@@ -177,9 +164,9 @@ public class DrunkGolfApp {
             System.out.println("Score card: " + results);
             System.out.println(score);
             System.out.println();
-            System.out.println("+ + + + + + + + + + + + + +");
-            System.out.println("Y O U   A R E   T R A S H");
-            System.out.println("+ + + + + + + + + + + + + +");
+            System.out.println("+ + + + + + + + + + + + + + + + + + + + + +");
+            System.out.println("B E T T E R   L U C K   N E X T   T I M E");
+            System.out.println("+ + + + + + + + + + + + + + + + + + + + + +");
         }
         if (score == 0) {
             System.out.println("Score card: " + results);
