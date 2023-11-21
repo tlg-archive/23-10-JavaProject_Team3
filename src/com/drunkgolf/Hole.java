@@ -15,7 +15,6 @@ public class Hole {
 
 
     // ctor
-
     Hole() {
         this.distanceToHole = generateHole();
         setPar(initialHoleDistance);

@@ -102,9 +102,7 @@ public class DrunkGolfApp {
 
 
         while (!validInput) {
-            //System.out.println("Please choose: [D]river, [I]ron, [W]edge, [P]utter, [R]ange for club ranges.");
             String userInput = prompter.prompt("Please choose: [D]river, [I]ron, [W]edge, [P]utter, [R]ange for club ranges.").trim().toUpperCase();
-            //String userInput = scanner.nextLine().trim().toUpperCase();
             if (userInput.matches("[A-Z]")) {
                 if ("D".equals(userInput)) {
                     club = ClubType.DRIVER;
@@ -163,7 +161,7 @@ public class DrunkGolfApp {
         int enterCount = 0;
 
         while (System.currentTimeMillis() < endTime) {
-            if (isEnterPressed()) { //make this method
+            if (isEnterPressed()) {
                 enterCount++;
             }
         }
